@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GATE Countdown</title>
+<style>
+html,body{margin:0;height:100%;background:#000;color:#fff;font-family:Arial,sans-serif}
+body{display:flex;align-items:center;justify-content:center}
+main{text-align:center}
+h1{font-size:clamp(1.2rem,3vw,2rem);font-weight:400;letter-spacing:6px;margin:0 0 30px;color:#888}
+#count{font-size:clamp(3rem,11vw,9rem);font-weight:700;letter-spacing:2px}
+#date{margin-top:22px;color:#666;font-size:1rem;letter-spacing:3px}
+</style>
+</head>
+<body>
+<main>
+<h1>GATE 2027</h1>
+<div id="count">00 : 00 : 00 : 00</div>
+<div id="date">DECEMBER 7, 2026</div>
+</main>
+<script>
+const target=new Date("2026-12-07T23:59:59+05:30").getTime();
+function update(){
+ let d=Math.max(0,target-Date.now());
+ let days=Math.floor(d/86400000); d%=86400000;
+ let hrs=Math.floor(d/3600000); d%=3600000;
+ let min=Math.floor(d/60000); d%=60000;
+ let sec=Math.floor(d/1000);
+ const p=n=>String(n).padStart(2,"0");
+ document.getElementById("count").textContent=`${p(days)} : ${p(hrs)} : ${p(min)} : ${p(sec)}`;
+}
+update();setInterval(update,1000);
+</script>
+</body>
+</html>
